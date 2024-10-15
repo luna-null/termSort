@@ -1,5 +1,5 @@
 [package]
-name = "Sorting_Algorithms"
+name = "termSort"
 version = "0.1.0"
 edition = "2021"
 
