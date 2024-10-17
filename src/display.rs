@@ -118,9 +118,7 @@ pub fn display(array: &mut Vec<i32>) -> io::Result<()> {
                         println!("Exiting...");
                         break;
                     },
-                    _ => {
-                        println!("You pressed a key!");
-                    },
+                    _ => {},
                 }
             }
         }
