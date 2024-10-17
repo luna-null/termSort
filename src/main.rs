@@ -1,8 +1,9 @@
 mod sorting_algorithms;
 mod utils;
 mod display;
+mod file_handling;
 
-use display::display;
+use display::{display, process_data};
 use sorting_algorithms::*;
 use utils::*;
 
@@ -17,5 +18,5 @@ fn main()
         handle_sort(sort_func, &mut test_array);
     }
 
-    display(&mut test_array);
+    process_data("selection_sort").unwrap();
 }   

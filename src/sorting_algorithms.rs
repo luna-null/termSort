@@ -1,6 +1,7 @@
-use crate::utils::*;
+use crate::{file_handling::{shuffle_and_log, store_and_log, swap_and_log}, utils::*};
 use std::collections::HashMap;
 use once_cell::sync::Lazy;
+use rand::seq::SliceRandom;
 
 pub static SORT_FUNCTIONS: Lazy<HashMap<&'static str, fn(&mut Vec<i32>)>> = Lazy::new(|| {
     let mut m = HashMap::new();
@@ -22,7 +23,7 @@ pub static SORT_FUNCTIONS: Lazy<HashMap<&'static str, fn(&mut Vec<i32>)>> = Lazy
 /// Once at the end of the list, it places it into a "sorted section"
 /// of the array, declaring that that part of the array is sorted and
 /// moving on to loop again. This is done until the loop is completed.
-pub fn selection_sort(array: &mut Vec<i32>)
+pub fn selection_sort(array: &mut Vec<i32>) /* TODO: ∀ <sort_function()> -> Vec<Vec<String>> */
 {
     for sorted_len in 0..array.len() {
         let mut min_index = store_and_log(vec![sorted_len], "selection_sort").unwrap()[0];
@@ -184,7 +185,7 @@ pub fn heap_sort(array: &mut Vec<i32>)
 pub fn bogo_sort(array: &mut Vec<i32>)
 {
     while !is_sorted(array) {
-        shuffle(array);
+        shuffle_and_log(array, "bogo_sort").unwrap();
     }
 }
 
@@ -196,7 +197,9 @@ pub fn bogobogo_sort(array: &mut Vec<i32>)
 
     bogobogo_sort(&mut array[0..(array.len()-1)].to_vec());
 
-    bogo_sort(array)
+    while !is_sorted(array) {
+        shuffle_and_log(array, "bogobogo_sort").unwrap();
+    }
 }
 
 
